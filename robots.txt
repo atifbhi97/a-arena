@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /login/
+Sitemap: https://a-arena.netlify.app/sitemap.xml

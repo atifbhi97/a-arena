@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta name="description" content="Join A-Arena for Free Fire tournaments, esports events, and exciting battles. Compete, win rewards, and become a champion!">
+  <meta name="keywords" content="A-Arena, Free Fire, esports, tournaments, gaming, Free Fire events, battle royale, online gaming">
+  <meta name="author" content="Atif">
+  <meta name="keywords" content="A-Arena, Free Fire, esports, tournaments, gaming, Free Fire events, battle royale, online gaming">
+  <meta name="author" content="Atif">   
+  <tittle>A-arena official</tittle>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4GCP5SZ5VW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-4GCP5SZ5VW');
+</script>
+<!-- CookieYes CMP Script -->
+<script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/5cfe412fd3b2e213a2c75446/script.js"></script>
+<!-- Consent Default Settings -->
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {
+  'ad_storage': 'denied',
+  'analytics_storage': 'denied',
+  'ad_personalization': 'denied',
+  'ad_user_data': 'denied'
+});
+</script>
+ <style>
+    /* ---------- BASIC RESET  ---------- */
+  *{box-sizing:border-box;margin:0;padding:0;font-family:Inter, system-ui, Arial, sans-serif;}
+  html,body{height:100%}
+  a{color:inherit;text-decoration:none}
+
+    /* Hamburger button */
+    .menu-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      z-index: 1001;
+    }
+    .menu-btn span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background: #333;
+      margin: 5px 0;
+      transition: 0.3s;
+    }
+    /* Sidebar on right */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      right: -250px;
+      width: 250px;
+      height: 100%;
+      background: black;
+    box-shadow: -2px 0 6px rgba(0,0,0,0.2);
+      padding: 20px;
+      transition: right 0.3s ease;
+      z-index: 1000;
+      color: white;
+    }
+    .sidebar.active {
+      right: 0;
+    }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+background: rgba(0,0,0,0.4);
+      display: none;
+      z-index: 999;
+    }
+    .overlay.active {
+      display: block;
+    }
+    .sidebar h2 {
+      margin-bottom: 20px;
+    }
+    .sidebar ul { list-style: none; }
+    .sidebar li {
+      margin: 15px 0;
+      cursor: pointer;
+      
+    }
+    
+
+  /* ---------- LAYOUT ---------- */
+  header{
+    position:sticky;top:0;z-index:999;
+    background:rgba(10,12,20,0.85);
+    backdrop-filter: blur(6px);
+    color: white;padding:10px 20px;
+    display:flex;align-items:center;justify-content:space-between;
+    border-bottom:1px solid rgba(255,255,255,0.04);
+  }
+  .mein-tittle{font-weight:800;font-size:20px;color:#ffd54f;letter-spacing:1px;}
+  nav{display:flex;gap:14px;align-items:center}
+  nav a{padding:8px 10px;border-radius:6px;font-size:14px;opacity:0.9}
+  nav a:hover{background:rgba(255,255,255,0.04)}
+
+  main{background: linear-gradient(180deg,#0b0f1a 0%, #0f1724 60%); color:#e8eef8; min-height:100vh}
+  .container{max-width:1100px;margin:0 auto;padding:36px 20px}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    display:flex;gap:24px;align-items:center;justify-content:space-between;
+    padding:28px;background:linear-gradient(90deg,rgba(255,213,79,0.06), rgba(110,241,179,0.02));
+    border-radius:12px;margin-top:18px;box-shadow:0 10px 30px rgba(0,0,0,0.5)
+  }
+  .hero .left{flex:1}
+  .hero h1{font-size:34px;margin-bottom:6px;color:#ffd54f;}
+  .hero p{color:#d6e6ff;margin-bottom:12px}
+  .cta{display:flex;gap:10px;flex-wrap:wrap}
+  .btn{background:#ffd54f;color:#07111a;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;box-shadow:0 8px 20px rgba(255,213,79,0.12)}
+  .btn.secondary{background:transparent;border:1px solid white;color:#fff}
+
+  .hero .right{width:300px; text-align:center}
+  .hero .qr{width:210px;height:50px;border-radius:12px;overflow:hidden;background:#fff;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 8px 20px rgba(255,213,79,0.12);background:#ffd54f;color:#07111a;
+  }
+  .hero .small{font-size:13px;color:#d0d8e6}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:36px 0;border-bottom:1px solid rgba(255,255,255,0.03)}
+  h2{color:#fff;margin-bottom:10px}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .card{background:rgba(255,255,255,0.03);padding:18px;border-radius:10px;border:1px solid rgba(255,255,255,0.04)}
+  p.note{color:#c7d5ff;opacity:0.9}
+
+  /* schedule list */
+  .schedule ul{list-style:none}
+  .schedule li{padding:20px 0;border-bottom:1px dashed rgba(255,255,255,0.03);display:flex;justify-content:space-between;align-items:center}
+
+  /* register form */
+  form{display:grid;gap:10px}
+  input,select,textarea{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);color:#eaf2ff}
+  label{font-size:13px;color:#cfe0ff}
+  .row{display:flex;gap:10px}
+  .row .col{flex:1}
+
+  .msg{padding:10px;border-radius:8px;margin-top:8px;display:none}
+  .msg.success{background:#0e3520;color:#b6f5c9}
+  .msg.error{background:#3b1515;color:#ffc7c7}
+
+  /* leaderboard */
+  table{width:100%;border-collapse:collapse;color:#e8f2ff}
+  th,td{padding:10px;border-bottom:1px solid rgba(255,255,255,0.03);text-align:left}
+  th{background:rgba(255,255,255,0.02);font-weight:700}
+
+  /* contact */
+  .contact .flex{display:flex;gap:12px;align-items:center}
+  .socials{display:flex;gap:10px}
+
+  /* responsive */
+  @media (max-width:900px){
+    .grid{grid-template-columns:1fr}
+    .hero{flex-direction:column;align-items:flex-start}
+    .hero .right{width:100%}
+    nav{display:none}
+    header{padding:12px}
+  }
+
+  /* small floating help */
+  .float-help{position:fixed;right:18px;bottom:18px;background:#ffd54f;color:#081018;padding:12px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.4);cursor:pointer;font-weight:700}
+  
+  
+  
+  /* ---------- RESPONSIVE IMPROVED ---------- */
+
+/* Tablet (max-width: 1024px) */
+@media (max-width:1024px){
+  .hero{flex-direction:column;text-align:center}
+  .hero .left,.hero .right{width:100%}
+  .grid{grid-template-columns:1fr}
+  .cta{justify-content:center}
+  nav{gap:8px}
+  h1{font-size:28px}
+}
+
+/* Mobile (max-width: 768px) */
+@media (max-width:768px){
+  header{flex-direction:column;align-items:flex-start;gap:10px}
+  nav{flex-wrap:wrap;justify-content:center;width:100%}
+  .hero{padding:20px}
+  .hero h1{font-size:24px}
+  .btn{padding:8px 12px;font-size:14px}
+  .card{padding:4px}
+  th,td{font-size:14px;padding:4px}
+  .float-help{right:12px;bottom:12px;padding:10px;font-size 14px;}
+}
+
+
+/* ---------- EXTRA RESPONSIVE RULES ---------- */
+@media (max-width: 768px) {
+  .hero { 
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+  .hero h1 {
+    font-size: 24px;
+    line-height: 1.3;
+  }
+  .hero .right {
+    width: 100%;
+  }
+  .qr {
+    width: 160px;
+    height: 160px;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .row {
+    flex-direction: column;
+  }
+  nav {
+    display: none; /* hide top menu on mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+  table, th, td {
+    font-size: 12px;
+  /*  word-break: break-word; */
+  }
+}
+#paragraph{
+  font-weight: 600;
+  color: white;
+  background-color: black;
+}
+.mein{
+  color: yellow;
+}
+.color{
+  white-space: nowrap;
+}
+.no-view-msg {
+  color: red;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+
+.logo{
+  height: 40px;
+   cursor: pointer;     /* hand cursor on hover */
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+/* Sirf mobile view (max-width 768px) ke liye */
+@media (max-width: 768px) {
+  .logo {
+height:40px;border-radius:50%;
+    border: 3px solid white;
+  }
+}
+/* Desktop (769px se upar) par margin remove */
+@media (min-width: 769px) {
+  .logo {
+    margin-right: 47px;
+    margin-left: 0px;
+    border-radius: 43px;
+    border: 3px solid white;
+  }
+}
+ /* Hamburger button */
+   
+    .menu-btn span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background: #333;
+      margin: 5px 0;
+      transition: 0.3s;
+    }
+@media (max-width: 768px) {
+  header {
+  height: 110px;
+  }
+}
+
+</style>
+
+  
+</head>
+<body>
+  <header>
+<div class="mein-tittle">A-ARENA</div>
+<nav>
+  <a href="#about">ABOUT</a>
+  <a href="#schedule">SCHEDULE</a>
+  <a href="#rules">RULES</a>
+  <a href="#register">REGISTER</a>
+<a href="#leaderboard">LEADERBOARD</a>
+  <a href="#contact">CONTACT</a>
+</nav>
+<div class="mini">Created on 20 Oct 2025</div>
+  <a href="index openlogo.html" class="logo-link">
+<img class="logo" src="logo.png">
+</a>
+
+</header>
+<main>
+<div class="container">
+<section class="hero" id="home">
+<div class="left">
+<h1>FREE FIRE • A-ARENA TOURNAMENT</h1>
+<p>Open for All. Fast matches, real winners, and live highlights. Join now — show your skill and win money!</p>
+<div class="cta">
+<button class="btn" onclick="scrollToId('register')">Register Now</button>
+<a class="btn secondary" href="#schedule">View Schedule</a>
+<a class="btn secondary" href="https://chat.whatsapp.com/BtHqEP9EHgB7RBzpQEkPU4?mode=wwc" target="_blank">
+  Join WhatsApp group 
+</a>
+</div>
+<p style="margin-top:10px;color:#c9d9ff;font-size:13px">Tip: Scan QR and join WhatsApp group because daily update and matches custom code and play earn money!. 
+-----------
+The button above that says Join WhatsApp Group can also be used to join WhatsApp. But if it doesn’t work for someone the second option is to scan this QR code with WhatsApps scanner and they will easily be able to join. Thank you</p>
+</div>
+<div class="right">
+<div class="qr">
+ <a href="index photo.html" style="text-decoration:none; color:inherit;">
+      <strong>OPEN WhatsApp QR CODE</strong>
+    </a>
+</div>
+<div class="small">Scan to Register</div>
+<div style="margin-top:12px;font-size:13px;color:#d6e6ff">Or visit YouTube channel:<a href="https://youtube.com/@a-arena37?si=XAAKePEbfmZGqITT" style="text-decoration:none; color:inherit;"> <strong style="color:#ffd54f"><u>A-ARENA</u></strong></a> click the name and easily open my channel</div>
+</div>
+</section>
+
+<!-- ABOUT + HIGHLIGHTS -->
+<section id="about">
+<div class="grid">
+<div class="card">
+<h2>About the Tournament</h2>
+<p class="note">A-arena Free Fire tournament for players across Pakistan. Every match is recorded and highlights uploaded on our YouTube channel.</p>
+<ul style="margin-top:10px;color:#d6e6ff">
+<li>Open for all skill levels</li>
+<li>entry fee 20 PKR</li>
+<li>Quick bracket, fast prizes</li>
+</ul>
+</div>
+<div class="card">
+<h2>Why Join?</h2>
+<p class="note">Get exposure, improve gameplay, find teams, and win real money.</p>
+<div style="margin-top:12px">
+<strong class="mein">Prizes:</strong>
+<div> 
+              
+<p id="paragraph"> entry fee 20 PKR ---  
+per kill 15 PKR 
+thousand of player enjoy and earn money</p></div>
+</div>
+</div>
+</div>
+</section>
+<!-- SCHEDULE -->
+<section id="schedule" class="schedule">
+<h2>Schedule</h2>
+<div class="card">
+<ul>
+<li><span>MATCH STARTED AT</span> <strong></strong></li>
+<li><span>Match 1</span> <em>Night 10:00 PM</em></li>
+<li><span>Match 2</span> <em>Night 12:20 PM</em></li>
+<li><span>Results & Highlights</span> <em>1:00 PM night</em></li>
+<li><span>Payment Time</span> <em>    You will get the money after the match ends.
+</em></li>
+<li><span>There will be 2 matches per day, and in the future, there will be more matches if people’s response is good. Thank you!</span></li>
+</ul>
+</div>
+</section>
+<!-- RULES -->
+<section id="rules">
+<h2>Rules</h2>
+<div class="card">
+<ol style="color:#d6e6ff">
+<li>No cheating or scripting. Any proof = disqualification.</li>
+<li>Follow match timings and room IDs on the website.</li>
+<li>Organizers decision final on disputes.</li>
+<li>Players must show match screenshot if required.</li>
+</ol>
+</div>
+</section>
+<!-- REGISTER -->
+<section id="register">
+<h2>Register</h2>
+<div class="card">
+<form id="regForm">
+<div class="row">
+<div class="col">
+<label>Player Name</label>
+<input id="pname" placeholder="Enter your in-game name" required />
+</div>
+<div class="col">
+<label>In-Game ID / UID</label>
+<input id="puid" placeholder="e.g. 8599774583" required />
+</div>
+</div>
+
+<div class="row">
+<div class="col">
+<label>Your Phone / WhatsApp number</label>
+<input id="pphone" placeholder="+92xxxxxxxxxx" />
+              </div>
+<div class="col">
+<label>City</label>
+<input id="pcity" placeholder="Your city name..." />
+</div>
+<div class="col">
+  <label>Email</label>
+  <input id="pemail" placeholder="Your email..." />
+</div>
+</div>
+<label>Special Note (optional)</label>
+<textarea id="pnote" rows="2" placeholder="Any notes.. Write anithing..."></textarea>
+
+<div style="display:flex;gap:8px;margin-top:8px">
+<button type="button" class="btn" onclick="submitForm()">Submit Registration</button>
+<button type="button" class="btn secondary" onclick="resetForm()">Reset</button>
+</div>
+
+<div id="formMsg" class="msg"></div>
+</form>
+</div>
+</section>
+<!-- LEADERBOARD -->
+<section id="leaderboard">
+<h2>Leaderboard / Registered Players</h2>
+<div class="card">
+<table id="tablePlayers">
+<thead>
+<tr><th>#</th><th>Name</th><th>UID</th><th>City</th><th>Phone and email</th></tr>
+</thead>
+<tbody>
+<!-- Filled by JS -->
+</tbody>
+</table>
+<div style="margin-top:10px;font-size:13px;color:#cfe3ff">Tip: Use this table to quickly inform players & manage brackets.</div>
+</div>
+</section>
+<!-- CONTACT -->
+<section id="contact">
+<h2>Contact</h2>
+<div class="grid">
+<div class="card contact">
+<h3>Organizers</h3>
+<p class="note">WhatsApp: +923306502660</p>
+<p class="note">Free Fire name: 아티프-모</p>
+<div class="socials" style="margin-top:12px">
+<div style="padding:8px;background:rgba(255,255,255,0.03);border-radius:8px">Discord: discord.gg <a href="https://discord.gg/RNtMwN7s"><u style="color:#ffd54f;">Atif아티프</u></a></div>
+<div style="padding:8px;background:rgba(255,255,255,0.03);border-radius:8px;">Instagram:<a href="https://www.instagram.com/gp.atif8/?utm_source=qr&r=nametag"> <u style="color:#ffd54f;">@khan.atif9</u></a></div>
+</div>
+</div>
+<div class="card">
+<h3>FAQ</h3>
+<p class="note"><strong>Q:</strong> Is entry fee? <strong>A:</strong> Yes, only 20 PKR. Per kill 15 PKR</p>
+<p class="note"><strong>Q:</strong> How do winners get money? <strong>A:</strong> or transfer via easy methods — details on results page.</p>
+
+
+<strong style="color: red; margin-left: 120px;">Disclaimer</strong>
+<p style="color: white; font-weight: 600; margin-left: 5px;">"A-arena" is an independent platform and is not affiliated with endorsed by or connected to any official eSports organization league or brand. All trademarks, logos, and brand names mentioned on this site belong to their respective owners. Any reference to existing eSports entities is for informational or descriptive purposes only and does not imply partnership or sponsorship.
+🚫this is not a esports🚷
+but this is A-arena ✅
+</p>
+</div>
+</div>
+</section>
+<footer style="padding:22px 0;text-align:center;color:#9fb7ff">
+        © 2025 a-arena • Built by Atif • <a href="#home">Back to top</a>
+</footer>
+</div>
+ </main>
+<div class="float-help" onclick="scrollToId('register')">Quick Register</div>
+ 
+
+  <!-- Hamburger Icon -->
+  <button class="menu-btn" id="menuBtn">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <h2>MENU</h2>
+  <strong> <ul>
+ <a href="index home.html"><li>Home</li></a>
+<a href="index Privacy Policy.html"><li>privacy policy</li></a>
+<a href="index tournament.html"><li>Tournament</li></a>
+<a href="index blog.html"><li>Blog/News</li></a>
+<a href="index events.html"><li>Events</li></a>
+<a href="index rules.html"><li>Rules & Regulations</li></a>
+<a href="index about.html"><li>About us</li></a>
+<a href="index contact us.html"><li>Contact us</li></a>
+<a href="index terms.html"><li>Terms of Service</li></a>
+<a href="index support.html"><li>Support/Help</li></a>
+<a href="index faq.html"><li>FQA</li></a>
+    </ul>   </strong> 
+  </div>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay"></div>
+
+  <script>
+  
+  function escapeHtml(text) {
+  return text.replace(/[&<>"']/g, m => (
+    {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]
+  ));
+}
+  
+    const menuBtn = document.getElementById('menuBtn');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+
+    menuBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('active');
+      overlay.classList.toggle('active');
+    });
+
+    overlay.addEventListener('click', () => {
+      sidebar.classList.remove('active');
+      overlay.classList.remove('active');
+    });
+  </script>
+
+<script>
+
+function isAdmin(){
+  // Sirf admin ke liye flag check karega
+  return localStorage.getItem('admin') === 'true';
+}
+
+  /* ---------- Smooth scroll for anchors ---------- */
+  function scrollToId(id){
+    document.getElementById(id).scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  /* ---------- Registration handling (localStorage) ---------- */
+  const STORAGE_KEY = 'A-arena players';
+
+  function getPlayers(){
+    try{
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    }catch(e){
+      return [];
+    }
+  }
+  function savePlayers(list){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+  }
+
+  function submitForm(){
+    const name = document.getElementById('pname').value.trim();
+    const uid = document.getElementById('puid').value.trim();
+    const phone = document.getElementById('pphone').value.trim();
+    const city = document.getElementById('pcity').value.trim();
+    const note = document.getElementById('pnote').value.trim();
+    const msg = document.getElementById('formMsg');
+
+    if(!name || !uid || !city || !email || !phone){
+      showMsg('Please enter your name and UID city email and phone/WhatsApp number.', 'error');
+      return;
+    }
+
+    // basic duplicate check by UID
+    let players = getPlayers();
+    const exists = players.find(p => p.uid === uid);
+    if(exists){
+      showMsg('UID already registered. Contact organizer if issue.', 'error');
+      return;
+    }
+
+    const newP = {name, uid, phone, city, note, time: Date.now()};
+    players.unshift(newP); // newest first
+    savePlayers(players);
+    showMsg('Registration successful! You are registered.', 'success');
+    renderTable();
+    resetFormFields();
+  }
+
+  function resetFormFields(){
+    document.getElementById('pname').value='';
+    document.getElementById('puid').value='';
+    document.getElementById('pphone').value='';
+    document.getElementById('pcity').value='';
+    document.getElementById('pnote').value='';
+    document.getElementById('pemail').value='';
+  }
+
+  function resetForm(){
+    if(confirm('Clear form fields?')) resetFormFields();
+  }
+
+  function showMsg(text, type){
+    const el = document.getElementById('formMsg');
+    el.style.display='block';
+    el.textContent = text;
+    el.className = 'msg ' + (type === 'success' ? 'success':'error');
+    setTimeout(()=>{ el.style.display='none'; }, 3500);
+  }
+
+  /* ---------- Render registered players in table ---------- */
+  function renderTable(){
+    const tbody = document.querySelector('#tablePlayers tbody');
+    const players = getPlayers();
+    tbody.innerHTML = '';
+    if(players.length===0){
+      tbody.innerHTML = `<tr><td colspan="5" style="opacity:.7">No registrations yet.</td></tr>`;
+      return;
+    }
+      players.forEach((p, idx) => {  
+      const tr = document.createElement('tr');  
+      tr.innerHTML = `<td>${idx+1}</td>  
+                      <td>${escapeHtml(p.name)}</td>  
+                      <td>${escapeHtml(p.uid)}</td>  
+                      <td>${escapeHtml(p.city||'-')}</td>  
+<td>${
+  isAdmin() 
+    ? escapeHtml(p.phone || '-') 
+    : '<span class="no-view-msg">You not allow to view players phone number and email</span>'
+}</td>`;
+      tbody.appendChild(tr);  
+    });  
+  }  
+
+  function escapeHtml(s){
+    if(!s) return '';
+    return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+  }
+
+  /* ---------- Download poster (prints page hero area as PDF) ---------- */
+  function downloadPoster(){
+    // simple: open poster printable HTML in new tab using same hero content
+    const hero = document.querySelector('.hero').outerHTML;
+    const title = document.querySelector('.hero h1').innerText;
+    const popup = window.open('', '_blank');
+    popup.document.write(`<html><head><title>${title} Poster</title>
+      <style>body{margin:0;padding:20px;font-family:Arial;background:#111;color:#fff} .wrap{width:210mm;height:297mm;display:flex;align-items:center;justify-content:center} .card{width:180mm;padding:12mm;border-radius:10px;background:linear-gradient(135deg,#0f0f2a,#2b0f2f);color:#fff}</style>
+      </head><body><div class="wrap"><div class="card">${hero}</div></div></body></html>`);
+    popup.document.close();
+    // user can Print -> Save as PDF
+  }
+
+  /* ---------- Init ---------- */
+  document.addEventListener('DOMContentLoaded',()=>{
+    renderTable();
+
+    /* anchor links smooth */
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', function(e){
+        const tgt = this.getAttribute('href').slice(1);
+        if(tgt){ e.preventDefault(); scrollToId(tgt); }
+      })
+    });
+  });
+  
+  
+</script>
+<!-- Add EmailJS SDK just before </body> -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  // 🔑 Apne EmailJS keys yahan dalen
+  const SERVICE_ID = "service_49u5wdm";
+  const TEMPLATE_ID = "template_otbiyiq";
+  const PUBLIC_KEY  = "jbD0KTRIh5OfDV8bV";
+
+  emailjs.init({ publicKey: PUBLIC_KEY });
+
+  // Purane submitForm ko edit karo: localStorage save ke baad email bhejo
+  function submitForm(){
+  const name = document.getElementById('pname').value.trim();
+  const uid = document.getElementById('puid').value.trim();
+  const phone = document.getElementById('pphone').value.trim();
+  const city = document.getElementById('pcity').value.trim();
+  const email = document.getElementById('pemail').value.trim();
+  const note = document.getElementById('pnote').value.trim();
+
+  if(!name || !uid || !city || !email || !phone){
+    showMsg('Please enter your name and UID city email phone/whatsapp number.','error');
+    return;
+  }
+
+  let players = getPlayers();
+  if(players.find(p => p.uid === uid)){
+    showMsg('player already registered.','error');
+    return;
+  }
+
+  const newP = {name, uid, phone, city, email, note, time: Date.now()};
+  players.unshift(newP);
+  savePlayers(players);
+  showMsg('Registration successful!','success');
+  renderTable();
+  resetFormFields();
+
+  // EmailJS
+  const emailParams = {
+    player_name: name,
+    player_uid: uid,
+    player_phone: phone || 'N/A',
+    player_city: city || 'N/A',
+    player_email: email || 'N/A',
+    player_note: note || 'No note'
+  };
+  //emailjs.send(SERVICE_ID, TEMPLATE_ID, emailParams)
+   // .then(() => console.log('Email sent'))
+   // .catch(err => console.error('Email error', err));
+   
+   
+   emailjs.send(SERVICE_ID, TEMPLATE_ID, emailParams)
+  .then((response) => {
+    console.log('✅ Email sent successfully:', response);
+    showMsg('Details sent! Have you applied on this website.','success');
+  })
+  .catch((err) => {
+    console.error('❌ Email error:', err);
+    showMsg('Email failed. See console for details.','error');
+  });
+}
+</script>
+</body>
+</html>

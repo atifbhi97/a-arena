@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Support/Help - A-ARENA</title>
+  <style>
+    /* Gradient background */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ff4b2b, #ff416c);
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    /* Content box with shadow */
+    .container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+
+    /* Premium red underline for heading */
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      position: relative;
+      display: inline-block;
+    }
+    h1::after {
+      content: "";
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 4px;
+      background: #ff0000;
+      border-radius: 2px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin: 15px 0;
+      line-height: 1.5;
+    }
+
+    /* Smooth hover animation for links (list items simulation) */
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #ff416c;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+    a:hover {
+      transform: translateY(-3px) scale(1.05);
+      color: #ff4b2b;
+    }
+
+    /* Responsive typography */
+    @media (max-width: 600px) {
+      h1 { font-size: 1.8rem; }
+      p, a { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Support / Help</h1>
+    <p>Agar koi issue ya question hai, WhatsApp par message bhejein: <strong>+923306502660</strong>.</p>
+    <p>email pe bhi support mil sakta hai: <strong><a style="color: black;" href="mailto:atifkhanak1502@gmail.com">atifkhanak1502@gmail.com</a></strong></p>
+    <a href="index.html">← Back to Home</a>
+  </div>
+</body>
+</html>
