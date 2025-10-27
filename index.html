@@ -526,8 +526,9 @@ but this is A-arena ✅
   <!-- Overlay -->
   <div class="overlay" id="overlay"></div>
 
-<script>
 
+<script>
+// delete kar deya is ky upar 
 function isAdmin(){
   // Sirf admin ke liye flag check karega
   return localStorage.getItem('admin') === 'true';
@@ -608,7 +609,7 @@ function isAdmin(){
     const players = getPlayers();
     tbody.innerHTML = '';
     if(players.length===0){
-      tbody.innerHTML = `<tr><td colspan="5" style="opacity:.7">No registrations yet.</td></tr>`;
+      tbody.innerHTML = <tr><td colspan="5" style="opacity:.7">No registrations yet.</td></tr>;
       return;
     }
       players.forEach((p, idx) => {  
@@ -630,7 +631,7 @@ function isAdmin(){
     if(!s) return '';
     return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
   }
-
+ 
   /* ---------- Download poster (prints page hero area as PDF) ---------- */
   function downloadPoster(){
     // simple: open poster printable HTML in new tab using same hero content
@@ -656,8 +657,6 @@ function isAdmin(){
       })
     });
   });
-  
-  
 </script>
 <!-- Firebase SDK -->
 <script type="module">
