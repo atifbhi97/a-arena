@@ -526,9 +526,31 @@ but this is A-arena ✅
   <!-- Overlay -->
   <div class="overlay" id="overlay"></div>
 
+  <script>
+  
+  function escapeHtml(text) {
+  return text.replace(/[&<>"']/g, m => (
+    {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]
+  ));
+}
+  
+    const menuBtn = document.getElementById('menuBtn');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+
+    menuBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('active');
+      overlay.classList.toggle('active');
+    });
+
+    overlay.addEventListener('click', () => {
+      sidebar.classList.remove('active');
+      overlay.classList.remove('active');
+    });
+  </script>
 
 <script>
-// delete kar deya is ky upar 
+
 function isAdmin(){
   // Sirf admin ke liye flag check karega
   return localStorage.getItem('admin') === 'true';
@@ -609,7 +631,7 @@ function isAdmin(){
     const players = getPlayers();
     tbody.innerHTML = '';
     if(players.length===0){
-      tbody.innerHTML = <tr><td colspan="5" style="opacity:.7">No registrations yet.</td></tr>;
+      tbody.innerHTML = `<tr><td colspan="5" style="opacity:.7">No registrations yet.</td></tr>`;
       return;
     }
       players.forEach((p, idx) => {  
@@ -631,7 +653,7 @@ function isAdmin(){
     if(!s) return '';
     return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
   }
- 
+
   /* ---------- Download poster (prints page hero area as PDF) ---------- */
   function downloadPoster(){
     // simple: open poster printable HTML in new tab using same hero content
@@ -657,225 +679,70 @@ function isAdmin(){
       })
     });
   });
+  
+  
 </script>
-<!-- Firebase SDK -->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { getDatabase, ref, push, onValue, query, orderByChild } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyCYYa-4O7hNeVg13jt4szPfHDpfn6UkLxo",
-    authDomain: "a-arena.firebaseapp.com",
-    databaseURL: "https://a-arena-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "a-arena",
-    storageBucket: "a-arena.firebasestorage.app",
-    messagingSenderId: "541764401979",
-    appId: "1:541764401979:web:95ac0662d8a83c0fb2951e",
-    measurementId: "G-WE0CDQK7VK"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const db = getDatabase(app);
-  window.firebaseDB = db;
-  window.firebaseRef = ref;
-  window.firebasePush = push;
-  window.firebaseOnValue = onValue;
-  window.firebaseQuery = query;
-  window.firebaseOrderByChild = orderByChild;
-
-  console.log('✅ Firebase initialized successfully!');
-</script>
-
-<!-- EmailJS SDK -->
+<!-- Add EmailJS SDK just before </body> -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
-<!-- Main JavaScript -->
 <script>
-  // EmailJS Config
+  // 🔑 Apne EmailJS keys yahan dalen
   const SERVICE_ID = "service_49u5wdm";
   const TEMPLATE_ID = "template_otbiyiq";
-  const PUBLIC_KEY = "jbD0KTRIh5OfDV8bV";
+  const PUBLIC_KEY  = "jbD0KTRIh5OfDV8bV";
+
   emailjs.init({ publicKey: PUBLIC_KEY });
 
-  function escapeHtml(text) {
-    if(!text) return '';
-    return String(text).replace(/[&<>"']/g, m => (
-      {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]
-    ));
+  // Purane submitForm ko edit karo: localStorage save ke baad email bhejo
+  function submitForm(){
+  const name = document.getElementById('pname').value.trim();
+  const uid = document.getElementById('puid').value.trim();
+  const phone = document.getElementById('pphone').value.trim();
+  const city = document.getElementById('pcity').value.trim();
+  const email = document.getElementById('pemail').value.trim();
+  const note = document.getElementById('pnote').value.trim();
+
+  if(!name || !uid || !city || !email || !phone){
+    showMsg('Please enter your name and UID city email phone/whatsapp number.','error');
+    return;
   }
 
-  function isAdmin(){
-    return localStorage.getItem('admin') === 'true';
+  let players = getPlayers();
+  if(players.find(p => p.uid === uid)){
+    showMsg('player already registered.','error');
+    return;
   }
 
-  function scrollToId(id){
-    document.getElementById(id).scrollIntoView({behavior:'smooth', block:'start'});
-  }
+  const newP = {name, uid, phone, city, email, note, time: Date.now()};
+  players.unshift(newP);
+  savePlayers(players);
+  showMsg('Registration successful!','success');
+  renderTable();
+  resetFormFields();
 
-  function loadPlayers(){
-    const playersRef = window.firebaseRef(window.firebaseDB, 'players');
-    const playersQuery = window.firebaseQuery(playersRef, window.firebaseOrderByChild('time'));
-    
-    window.firebaseOnValue(playersQuery, (snapshot) => {
-      const tbody = document.querySelector('#tablePlayers tbody');
-      tbody.innerHTML = '';
-      
-      if(!snapshot.exists()){
-        tbody.innerHTML = <tr><td colspan="5" style="opacity:.7;text-align:center">No registrations yet.</td></tr>;
-        return;
-      }
-
-      const players = [];
-      snapshot.forEach((child) => {
-        players.push({id: child.key, ...child.val()});
-      });
-      
-      players.reverse();
-
-      players.forEach((p, idx) => {
-        const tr = document.createElement('tr');
-        const phoneEmail = isAdmin() 
-          ? ${escapeHtml(p.phone||'-')} / ${escapeHtml(p.email||'-')}
-          : '<span class="no-view-msg">You not allow to view players phone number and email</span>';
-        
-        tr.innerHTML = `<td>${idx+1}</td>
-                        <td>${escapeHtml(p.name)}</td>
-                        <td>${escapeHtml(p.uid)}</td>
-                        <td>${escapeHtml(p.city||'-')}</td>
-                        <td>${phoneEmail}</td>`;
-        tbody.appendChild(tr);
-      });
-
-      console.log(✅ Loaded ${players.length} players from Firebase);
-    }, (error) => {
-      console.error('❌ Firebase read error:', error);
-      const tbody = document.querySelector('#tablePlayers tbody');
-      tbody.innerHTML = <tr><td colspan="5" style="color:red;text-align:center">Error loading data. Check console.</td></tr>;
-    });
-  }
-
-  async function submitForm(){
-    const name = document.getElementById('pname').value.trim();
-    const uid = document.getElementById('puid').value.trim();
-    const phone = document.getElementById('pphone').value.trim();
-    const city = document.getElementById('pcity').value.trim();
-    const email = document.getElementById('pemail').value.trim();
-    const note = document.getElementById('pnote').value.trim();
-
-    if(!name || !uid || !city || !email || !phone){
-      showMsg('❌ Please fill all required fields (Name, UID, Phone, City, Email).', 'error');
-      return;
-    }
-
-    const playersRef = window.firebaseRef(window.firebaseDB, 'players');
-    
-    window.firebaseOnValue(playersRef, async (snapshot) => {
-      let duplicate = false;
-      
-      snapshot.forEach((child) => {
-        if(child.val().uid === uid) {
-          duplicate = true;
-        }
-      });
-
-      if(duplicate){
-        showMsg('❌ UID already registered. Contact organizer if issue.', 'error');
-        return;
-      }
-
-      const newPlayer = {
-        name, 
-        uid, 
-        phone, 
-        city, 
-        email, 
-        note: note || '',
-        time: Date.now()
-      };
-
-      try {
-        await window.firebasePush(playersRef, newPlayer);
-        showMsg('✅ Registration successful! You are registered.', 'success');
-        resetFormFields();
-
-        const emailParams = {
-          player_name: name,
-          player_uid: uid,
-          player_phone: phone,
-          player_city: city,
-          player_email: email,
-          player_note: note || 'No note'
-        };
-
-        emailjs.send(SERVICE_ID, TEMPLATE_ID, emailParams)
-          .then((response) => {
-            console.log('✅ Email sent successfully:', response);
-          })
-          .catch(err => {
-            console.error('❌ Email error:', err);
-          });
-
-      } catch(error) {
-        showMsg('❌ Registration failed. Please try again.', 'error');
-        console.error('Firebase error:', error);
-      }
-    }, {onlyOnce: true});
-  }
-
-  function resetFormFields(){
-    document.getElementById('pname').value = '';
-    document.getElementById('puid').value = '';
-    document.getElementById('pphone').value = '';
-    document.getElementById('pcity').value = '';
-    document.getElementById('pemail').value = '';
-    document.getElementById('pnote').value = '';
-  }
-
-  function resetForm(){
-    if(confirm('Clear all form fields?')) {
-      resetFormFields();
-    }
-  }
-
-  function showMsg(text, type){
-    const el = document.getElementById('formMsg');
-    el.style.display = 'block';
-    el.textContent = text;
-    el.className = 'msg ' + (type === 'success' ? 'success' : 'error');
-    setTimeout(() => { 
-      el.style.display = 'none'; 
-    }, 4000);
-  }
-
-  const menuBtn = document.getElementById('menuBtn');
-  const sidebar = document.getElementById('sidebar');
-  const overlay = document.getElementById('overlay');
-
-  menuBtn.addEventListener('click', () => {
-    sidebar.classList.toggle('active');
-    overlay.classList.toggle('active');
+  // EmailJS
+  const emailParams = {
+    player_name: name,
+    player_uid: uid,
+    player_phone: phone || 'N/A',
+    player_city: city || 'N/A',
+    player_email: email || 'N/A',
+    player_note: note || 'No note'
+  };
+  //emailjs.send(SERVICE_ID, TEMPLATE_ID, emailParams)
+   // .then(() => console.log('Email sent'))
+   // .catch(err => console.error('Email error', err));
+   
+   
+   emailjs.send(SERVICE_ID, TEMPLATE_ID, emailParams)
+  .then((response) => {
+    console.log('✅ Email sent successfully:', response);
+    showMsg('Details sent! Have you applied on this website.','success');
+  })
+  .catch((err) => {
+    console.error('❌ Email error:', err);
+    showMsg('Email failed. See console for details.','error');
   });
-
-  overlay.addEventListener('click', () => {
-    sidebar.classList.remove('active');
-    overlay.classList.remove('active');
-  });
-
-  document.addEventListener('DOMContentLoaded', () => {
-    loadPlayers();
-
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', function(e){
-        const tgt = this.getAttribute('href').slice(1);
-        if(tgt){ 
-          e.preventDefault(); 
-          scrollToId(tgt); 
-        }
-      });
-    });
-
-    console.log('✅ Page initialized successfully!');
-  });
+}
 </script>
 </body>
 </html>
