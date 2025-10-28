@@ -29,6 +29,10 @@ gtag('consent', 'default', {
   'ad_user_data': 'denied'
 });
 </script>
+
+<!-- 🔥 Appwrite SDK -->
+<script src="https://cdn.jsdelivr.net/npm/appwrite@13.0.1"></script>
+
  <style>
     /* ---------- BASIC RESET  ---------- */
   *{box-sizing:border-box;margin:0;padding:0;font-family:Inter, system-ui, Arial, sans-serif;}
@@ -340,7 +344,7 @@ height:40px;border-radius:50%;
 </div>
 <p style="margin-top:10px;color:#c9d9ff;font-size:13px">Tip: Scan QR and join WhatsApp group because daily update and matches custom code and play earn money!. 
 -----------
-The button above that says Join WhatsApp Group can also be used to join WhatsApp. But if it doesn’t work for someone the second option is to scan this QR code with WhatsApps scanner and they will easily be able to join. Thank you</p>
+The button above that says Join WhatsApp Group can also be used to join WhatsApp. But if it doesn't work for someone the second option is to scan this QR code with WhatsApps scanner and they will easily be able to join. Thank you</p>
 </div>
 <div class="right">
 <div class="qr">
@@ -390,7 +394,7 @@ thousand of player enjoy and earn money</p></div>
 <li><span>Results & Highlights</span> <em>1:00 PM night</em></li>
 <li><span>Payment Time</span> <em>    You will get the money after the match ends.
 </em></li>
-<li><span>There will be 2 matches per day, and in the future, there will be more matches if people’s response is good. Thank you!</span></li>
+<li><span>There will be 2 matches per day, and in the future, there will be more matches if people's response is good. Thank you!</span></li>
 </ul>
 </div>
 </section>
@@ -550,150 +554,58 @@ but this is A-arena ✅
   </script>
 
 <script>
+// ========================================
+// 🔥 APPWRITE CONFIGURATION
+// ========================================
+const APPWRITE_ENDPOINT = 'https://cloud.appwrite.io/v1';
+const APPWRITE_PROJECT_ID = '68ffa87e9835d071c155';
+const APPWRITE_DATABASE_ID = '6900d4e4033684d3c96';
+const APPWRITE_COLLECTION_ID = 'tournament-players';
 
+// Initialize Appwrite
+const { Client, Databases, Query } = Appwrite;
+const client = new Client();
+client
+.setEndpoint('https://cloud.appwrite.io/v1')
+.setProject('68ffa87e9835d071c155');
+
+const databases = new Databases(client);
+
+// ========================================
+// Admin check (purana wala)
+// ========================================
 function isAdmin(){
-  // Sirf admin ke liye flag check karega
   return localStorage.getItem('admin') === 'true';
 }
 
-  /* ---------- Smooth scroll for anchors ---------- */
-  function scrollToId(id){
-    document.getElementById(id).scrollIntoView({behavior:'smooth', block:'start'});
+// ========================================
+// Smooth scroll
+// ========================================
+function scrollToId(id){
+  document.getElementById(id).scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+// ========================================
+// GET ALL PLAYERS from Appwrite
+// ========================================
+async function getPlayers(){
+  try {
+    const response = await databases.listDocuments(
+      APPWRITE_DATABASE_ID,
+      APPWRITE_COLLECTION_ID,
+      [Query.orderDesc('$createdAt'), Query.limit(100)]
+    );
+    return response.documents;
+  } catch(error) {
+    console.error('Error fetching players:', error);
+    return [];
   }
+}
 
-  /* ---------- Registration handling (localStorage) ---------- */
-  const STORAGE_KEY = 'A-arena players';
-
-  function getPlayers(){
-    try{
-      return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-    }catch(e){
-      return [];
-    }
-  }
-  function savePlayers(list){
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
-  }
-
-  function submitForm(){
-    const name = document.getElementById('pname').value.trim();
-    const uid = document.getElementById('puid').value.trim();
-    const phone = document.getElementById('pphone').value.trim();
-    const city = document.getElementById('pcity').value.trim();
-    const note = document.getElementById('pnote').value.trim();
-    const msg = document.getElementById('formMsg');
-
-    if(!name || !uid || !city || !email || !phone){
-      showMsg('Please enter your name and UID city email and phone/WhatsApp number.', 'error');
-      return;
-    }
-
-    // basic duplicate check by UID
-    let players = getPlayers();
-    const exists = players.find(p => p.uid === uid);
-    if(exists){
-      showMsg('UID already registered. Contact organizer if issue.', 'error');
-      return;
-    }
-
-    const newP = {name, uid, phone, city, note, time: Date.now()};
-    players.unshift(newP); // newest first
-    savePlayers(players);
-    showMsg('Registration successful! You are registered.', 'success');
-    renderTable();
-    resetFormFields();
-  }
-
-  function resetFormFields(){
-    document.getElementById('pname').value='';
-    document.getElementById('puid').value='';
-    document.getElementById('pphone').value='';
-    document.getElementById('pcity').value='';
-    document.getElementById('pnote').value='';
-    document.getElementById('pemail').value='';
-  }
-
-  function resetForm(){
-    if(confirm('Clear form fields?')) resetFormFields();
-  }
-
-  function showMsg(text, type){
-    const el = document.getElementById('formMsg');
-    el.style.display='block';
-    el.textContent = text;
-    el.className = 'msg ' + (type === 'success' ? 'success':'error');
-    setTimeout(()=>{ el.style.display='none'; }, 3500);
-  }
-
-  /* ---------- Render registered players in table ---------- */
-  function renderTable(){
-    const tbody = document.querySelector('#tablePlayers tbody');
-    const players = getPlayers();
-    tbody.innerHTML = '';
-    if(players.length===0){
-      tbody.innerHTML = `<tr><td colspan="5" style="opacity:.7">No registrations yet.</td></tr>`;
-      return;
-    }
-      players.forEach((p, idx) => {  
-      const tr = document.createElement('tr');  
-      tr.innerHTML = `<td>${idx+1}</td>  
-                      <td>${escapeHtml(p.name)}</td>  
-                      <td>${escapeHtml(p.uid)}</td>  
-                      <td>${escapeHtml(p.city||'-')}</td>  
-<td>${
-  isAdmin() 
-    ? escapeHtml(p.phone || '-') 
-    : '<span class="no-view-msg">You not allow to view players phone number and email</span>'
-}</td>`;
-      tbody.appendChild(tr);  
-    });  
-  }  
-
-  function escapeHtml(s){
-    if(!s) return '';
-    return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
-  }
-
-  /* ---------- Download poster (prints page hero area as PDF) ---------- */
-  function downloadPoster(){
-    // simple: open poster printable HTML in new tab using same hero content
-    const hero = document.querySelector('.hero').outerHTML;
-    const title = document.querySelector('.hero h1').innerText;
-    const popup = window.open('', '_blank');
-    popup.document.write(`<html><head><title>${title} Poster</title>
-      <style>body{margin:0;padding:20px;font-family:Arial;background:#111;color:#fff} .wrap{width:210mm;height:297mm;display:flex;align-items:center;justify-content:center} .card{width:180mm;padding:12mm;border-radius:10px;background:linear-gradient(135deg,#0f0f2a,#2b0f2f);color:#fff}</style>
-      </head><body><div class="wrap"><div class="card">${hero}</div></div></body></html>`);
-    popup.document.close();
-    // user can Print -> Save as PDF
-  }
-
-  /* ---------- Init ---------- */
-  document.addEventListener('DOMContentLoaded',()=>{
-    renderTable();
-
-    /* anchor links smooth */
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', function(e){
-        const tgt = this.getAttribute('href').slice(1);
-        if(tgt){ e.preventDefault(); scrollToId(tgt); }
-      })
-    });
-  });
-  
-  
-</script>
-<!-- Add EmailJS SDK just before </body> -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script>
-  // 🔑 Apne EmailJS keys yahan dalen
-  const SERVICE_ID = "service_49u5wdm";
-  const TEMPLATE_ID = "template_otbiyiq";
-  const PUBLIC_KEY  = "jbD0KTRIh5OfDV8bV";
-
-  emailjs.init({ publicKey: PUBLIC_KEY });
-
-  // Purane submitForm ko edit karo: localStorage save ke baad email bhejo
-  function submitForm(){
+// ========================================
+// SUBMIT FORM - Save to Appwrite
+// ========================================
+async function submitForm(){
   const name = document.getElementById('pname').value.trim();
   const uid = document.getElementById('puid').value.trim();
   const phone = document.getElementById('pphone').value.trim();
@@ -702,24 +614,121 @@ function isAdmin(){
   const note = document.getElementById('pnote').value.trim();
 
   if(!name || !uid || !city || !email || !phone){
-    showMsg('Please enter your name and UID city email phone/whatsapp number.','error');
+    showMsg('Please enter your name, UID, city, email, and phone/WhatsApp number.', 'error');
     return;
   }
 
-  let players = getPlayers();
-  if(players.find(p => p.uid === uid)){
-    showMsg('player already registered.','error');
+  // Check duplicate UID
+  try {
+    const existingPlayers = await databases.listDocuments(
+      APPWRITE_DATABASE_ID,
+      APPWRITE_COLLECTION_ID,
+      [Query.equal('uid', uid)]
+    );
+    
+    if(existingPlayers.documents.length > 0){
+      showMsg('UID already registered. Contact organizer if issue.', 'error');
+      return;
+    }
+
+// Create new document in Appwrite
+    const newPlayer = await databases.createDocument(
+      APPWRITE_DATABASE_ID,
+      APPWRITE_COLLECTION_ID,
+      'unique()', // Auto-generate document ID
+      {
+        name: name,
+        uid: uid,
+        phone: phone,
+        city: city,
+        email: email,
+        note: note
+      }
+    );
+
+    showMsg('Registration successful! You are registered.', 'success');
+    renderTable();
+    resetFormFields();
+    
+    // Send email via EmailJS
+    sendEmailNotification(name, uid, phone, city, email, note);
+
+  } catch(error) {
+    console.error('Registration error:', error);
+    showMsg('Registration failed. Please try again.', 'error');
+  }
+}
+
+// ========================================
+// RESET FORM
+// ========================================
+function resetFormFields(){
+  document.getElementById('pname').value='';
+  document.getElementById('puid').value='';
+  document.getElementById('pphone').value='';
+  document.getElementById('pcity').value='';
+  document.getElementById('pnote').value='';
+  document.getElementById('pemail').value='';
+}
+
+function resetForm(){
+  if(confirm('Clear form fields?')) resetFormFields();
+}
+
+// ========================================
+// SHOW MESSAGE
+// ========================================
+function showMsg(text, type){
+  const el = document.getElementById('formMsg');
+  el.style.display='block';
+  el.textContent = text;
+  el.className = 'msg ' + (type === 'success' ? 'success':'error');
+  setTimeout(()=>{ el.style.display='none'; }, 3500);
+}
+
+// ========================================
+// RENDER TABLE from Appwrite
+// ========================================
+async function renderTable(){
+  const tbody = document.querySelector('#tablePlayers tbody');
+  tbody.innerHTML = '<tr><td colspan="5" style="opacity:.7">Loading...</td></tr>';
+  
+  const players = await getPlayers();
+  tbody.innerHTML = '';
+  
+  if(players.length === 0){
+    tbody.innerHTML = <tr><td colspan="5" style="opacity:.7">No registrations yet.</td></tr>;
     return;
   }
+  
+  players.forEach((p, idx) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${idx+1}</td>
+                    <td>${escapeHtml(p.name)}</td>
+                    <td>${escapeHtml(p.uid)}</td>
+                    <td>${escapeHtml(p.city||'-')}</td>
+                    <td>${
+                      isAdmin() 
+                        ? escapeHtml(p.phone || '-') + ' / ' + escapeHtml(p.email || '-')
+                        : '<span class="no-view-msg">You not allow to view players phone number and email</span>'
+                    }</td>`;
+    tbody.appendChild(tr);
+  });
+}
 
-  const newP = {name, uid, phone, city, email, note, time: Date.now()};
-  players.unshift(newP);
-  savePlayers(players);
-  showMsg('Registration successful!','success');
-  renderTable();
-  resetFormFields();
+function escapeHtml(s){
+  if(!s) return '';
+  return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+}
 
-  // EmailJS
+// ========================================
+// EMAILJS INTEGRATION
+// ========================================
+const SERVICE_ID = "service_49u5wdm";
+const TEMPLATE_ID = "template_otbiyiq";
+const PUBLIC_KEY  = "jbD0KTRIh5OfDV8bV";
+
+function sendEmailNotification(name, uid, phone, city, email, note){
   const emailParams = {
     player_name: name,
     player_uid: uid,
@@ -728,21 +737,38 @@ function isAdmin(){
     player_email: email || 'N/A',
     player_note: note || 'No note'
   };
-  //emailjs.send(SERVICE_ID, TEMPLATE_ID, emailParams)
-   // .then(() => console.log('Email sent'))
-   // .catch(err => console.error('Email error', err));
-   
-   
-   emailjs.send(SERVICE_ID, TEMPLATE_ID, emailParams)
-  .then((response) => {
-    console.log('✅ Email sent successfully:', response);
-    showMsg('Details sent! Have you applied on this website.','success');
-  })
-  .catch((err) => {
-    console.error('❌ Email error:', err);
-    showMsg('Email failed. See console for details.','error');
-  });
+  
+  emailjs.send(SERVICE_ID, TEMPLATE_ID, emailParams)
+    .then((response) => {
+      console.log('✅ Email sent successfully:', response);
+    })
+    .catch((err) => {
+      console.error('❌ Email error:', err);
+    });
 }
+
+// ========================================
+// INITIALIZE ON PAGE LOAD
+// ========================================
+document.addEventListener('DOMContentLoaded', async () => {
+  // Load EmailJS
+  emailjs.init({ publicKey: PUBLIC_KEY });
+  
+  // Render leaderboard
+  await renderTable();
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', function(e){
+      const tgt = this.getAttribute('href').slice(1);
+      if(tgt){ e.preventDefault(); scrollToId(tgt); }
+    })
+  });
+});
 </script>
+
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
 </body>
 </html>
