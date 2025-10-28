@@ -31,8 +31,7 @@ gtag('consent', 'default', {
 </script>
 
 <!-- 🔥 Appwrite SDK -->
-<script src="https://cdn.jsdelivr.net/npm/appwrite@13.0.1"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/appwrite@13.0.0"></script>
  <style>
     /* ---------- BASIC RESET  ---------- */
   *{box-sizing:border-box;margin:0;padding:0;font-family:Inter, system-ui, Arial, sans-serif;}
@@ -530,6 +529,14 @@ but this is A-arena ✅
   <!-- Overlay -->
   <div class="overlay" id="overlay"></div>
 
+<script>
+const client = new Appwrite.Client()
+    .setEndpoint('https://tor.cloud.appwrite.io/v1') // from your screenshot
+    .setProject('68ffa07e00358d71c155'); // your project ID
+
+const databases = new Appwrite.Databases(client);
+</script>
+ 
   <script>
   
   function escapeHtml(text) {
