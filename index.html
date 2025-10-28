@@ -31,7 +31,8 @@ gtag('consent', 'default', {
 </script>
 
 <!-- 🔥 Appwrite SDK -->
-<script src="https://cdn.jsdelivr.net/npm/appwrite@13.0.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/appwrite@14.0.1/dist/iife/sdk.js"></script>
+
  <style>
     /* ---------- BASIC RESET  ---------- */
   *{box-sizing:border-box;margin:0;padding:0;font-family:Inter, system-ui, Arial, sans-serif;}
@@ -528,7 +529,7 @@ but this is A-arena ✅
 
   <!-- Overlay -->
   <div class="overlay" id="overlay"></div>
- 
+
   <script>
   
   function escapeHtml(text) {
@@ -557,18 +558,18 @@ but this is A-arena ✅
 // 🔥 APPWRITE CONFIGURATION
 // ========================================
 const APPWRITE_ENDPOINT = 'https://cloud.appwrite.io/v1';
-const APPWRITE_PROJECT_ID = '68ffa87e9835d071c155';
+const APPWRITE_PROJECT_ID = '68ffa07e00358d71c155';
 const APPWRITE_DATABASE_ID = '6900d4e4033684d3c96';
 const APPWRITE_COLLECTION_ID = 'tournament-players';
 
 // Initialize Appwrite
-const { Client, Databases, Query } = Appwrite;
-const client = new Client();
-client
-.setEndpoint('https://cloud.appwrite.io/v1')
-.setProject('68ffa87e9835d071c155');
+const client = new Appwrite.Client();
+const databases = new Appwrite.Databases(client);
+const query = Appwrite.Query;
 
-const databases = new Databases(client);
+client
+  .setEndpoint('https://cloud.appwrite.io/v1')
+  .setProject('68ffa87e9835d071c155');
 
 // ========================================
 // Admin check (purana wala)
@@ -592,7 +593,7 @@ async function getPlayers(){
     const response = await databases.listDocuments(
       APPWRITE_DATABASE_ID,
       APPWRITE_COLLECTION_ID,
-      [Query.orderDesc('$createdAt'), Query.limit(100)]
+  [query.orderDesc('$createdAt'), query.limit(100)]
     );
     return response.documents;
   } catch(error) {
@@ -622,7 +623,7 @@ async function submitForm(){
     const existingPlayers = await databases.listDocuments(
       APPWRITE_DATABASE_ID,
       APPWRITE_COLLECTION_ID,
-      [Query.equal('uid', uid)]
+      [query.equal('uid', uid)]
     );
     
     if(existingPlayers.documents.length > 0){
@@ -630,7 +631,7 @@ async function submitForm(){
       return;
     }
 
-// Create new document in Appwrite
+// :create new document in Appwrite
     const newPlayer = await databases.createDocument(
       APPWRITE_DATABASE_ID,
       APPWRITE_COLLECTION_ID,
