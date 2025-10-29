@@ -651,7 +651,7 @@ function renderTable(){
   
   tbody.innerHTML = '';
   if(allPlayers.length === 0){
-    tbody.innerHTML = <tr><td colspan="5" style="opacity:.7">No registrations yet.</td></tr>;
+   tbody.innerHTML = `<tr><td colspan="5" style="opacity:.7">No registrations yet.</td></tr>`;
     return;
   }
   
