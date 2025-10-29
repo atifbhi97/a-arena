@@ -157,7 +157,7 @@ background: rgba(0,0,0,0.4);
 
   /* leaderboard */
   table{width:100%;border-collapse:collapse;color:#e8f2ff}
-  th,td{padding:10px;border-bottom:1px solid rgba(255,255,255,0.03);text-align:left}
+th,td{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,0.03);text-align:left}
   th{background:rgba(255,255,255,0.02);font-weight:700}
 
   /* contact */
@@ -575,15 +575,15 @@ function isAdmin(){
   function savePlayers(list){
     localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
   }
-
- /* ---------- Dummy Players (Fake Data) ---------- */
+  
+  /* ---------- Dummy Players (Fake Data) ---------- */
 function getDummyPlayers(){
   return [
     {name: 'Shadow_Killer', uid: '8599774583', city: 'Karachi'},
     {name: 'ProGamer99', uid: '7788990011', city: 'Lahore'},
     {name: 'FireStorm', uid: '6655443322', city: 'Islamabad'},
     {name: 'HeadHunter', uid: '5544332211', city: 'mirpurkhas'},
-    {name: 'SnipeKing', uid: '4433221100', city: 'mirpurkhas'},
+    {name: 'SnipeKing', uid: '4433221100', city: 'pakistan'},
     {name: 'BattleQueen', uid: '3322110099', city: 'Faisalabad'},
     {name: 'RushMaster', uid: '2211009988', city: 'hydrabad'},
   ];
@@ -639,7 +639,8 @@ function getDummyPlayers(){
     setTimeout(()=>{ el.style.display='none'; }, 3500);
   }
 
- /* ---------- Render registered players in table ---------- */
+ 
+/* ---------- Render registered players in table ---------- */
 function renderTable(){
   const tbody = document.querySelector('#tablePlayers tbody');
   const realPlayers = getPlayers();
