@@ -198,7 +198,7 @@ background: rgba(0,0,0,0.4);
   .hero h1{font-size:24px}
   .btn{padding:8px 12px;font-size:14px}
   .card{padding:4px}
-  th,td{font-size:14px;padding:4px}
+th,td{font-size:14px;padding:5px 5px}
   .float-help{right:12px;bottom:12px;padding:10px;font-size:14px;}
 }
 
@@ -576,6 +576,19 @@ function isAdmin(){
     localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
   }
 
+ /* ---------- Dummy Players (Fake Data) ---------- */
+function getDummyPlayers(){
+  return [
+    {name: 'Shadow_Killer', uid: '8599774583', city: 'Karachi'},
+    {name: 'ProGamer99', uid: '7788990011', city: 'Lahore'},
+    {name: 'FireStorm', uid: '6655443322', city: 'Islamabad'},
+    {name: 'HeadHunter', uid: '5544332211', city: 'mirpurkhas'},
+    {name: 'SnipeKing', uid: '4433221100', city: 'mirpurkhas'},
+    {name: 'BattleQueen', uid: '3322110099', city: 'Faisalabad'},
+    {name: 'RushMaster', uid: '2211009988', city: 'hydrabad'},
+  ];
+}
+
   function submitForm(){
     const name = document.getElementById('pname').value.trim();
     const uid = document.getElementById('puid').value.trim();
@@ -626,29 +639,35 @@ function isAdmin(){
     setTimeout(()=>{ el.style.display='none'; }, 3500);
   }
 
-  /* ---------- Render registered players in table ---------- */
-  function renderTable(){
-    const tbody = document.querySelector('#tablePlayers tbody');
-    const players = getPlayers();
-    tbody.innerHTML = '';
-    if(players.length===0){
-      tbody.innerHTML = `<tr><td colspan="5" style="opacity:.7">No registrations yet.</td></tr>`;
-      return;
-    }
-      players.forEach((p, idx) => {  
-      const tr = document.createElement('tr');  
-      tr.innerHTML = `<td>${idx+1}</td>  
-                      <td>${escapeHtml(p.name)}</td>  
-                      <td>${escapeHtml(p.uid)}</td>  
-                      <td>${escapeHtml(p.city||'-')}</td>  
+ /* ---------- Render registered players in table ---------- */
+function renderTable(){
+  const tbody = document.querySelector('#tablePlayers tbody');
+  const realPlayers = getPlayers();
+  const dummyPlayers = getDummyPlayers();
+  
+  // Real players PEHLE, phir dummy players
+  const allPlayers = [...realPlayers, ...dummyPlayers];
+  
+  tbody.innerHTML = '';
+  if(allPlayers.length === 0){
+    tbody.innerHTML = <tr><td colspan="5" style="opacity:.7">No registrations yet.</td></tr>;
+    return;
+  }
+  
+  allPlayers.forEach((p, idx) => {  
+    const tr = document.createElement('tr');  
+    tr.innerHTML = `<td>${idx+1}</td>  
+                    <td>${escapeHtml(p.name)}</td>  
+                    <td>${escapeHtml(p.uid)}</td>  
+                    <td>${escapeHtml(p.city||'-')}</td>  
 <td>${
-  isAdmin() 
-    ? escapeHtml(p.phone || '-') 
-    : '<span class="no-view-msg">You not allow to view players phone number and email</span>'
+isAdmin() 
+  ? escapeHtml(p.phone || '-') 
+  : '<span class="no-view-msg">You not allow to view</span>'
 }</td>`;
-      tbody.appendChild(tr);  
-    });  
-  }  
+    tbody.appendChild(tr);  
+  });  
+}
 
   function escapeHtml(s){
     if(!s) return '';
