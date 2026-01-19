@@ -197,8 +197,54 @@ background: rgba(0,0,0,0.4);
   p.note{color:#c7d5ff;opacity:0.9}
 
   /* schedule list */
-  .schedule ul{list-style:none}
-  .schedule li{padding:20px 0;border-bottom:1px dashed rgba(255,255,255,0.03);display:flex;justify-content:space-between;align-items:center}
+.schedule{
+  max-width:700px;
+  margin:50px auto;
+  padding:0 15px;
+  color:#fff;
+}
+
+.schedule h2{
+  text-align:center;
+  font-size:2rem;
+  margin-bottom:20px;
+}
+
+.schedule ul{
+  list-style:none;
+  padding:0;
+  margin:0;
+  background:rgba(255,255,255,0.03);
+  border-radius:15px;
+  border:1px solid rgba(255,255,255,0.04);
+  box-shadow:0 0 20px rgba(0,0,0,0.3);
+}
+
+.schedule li{
+  padding:15px 10px;
+  border-bottom:1px dashed rgba(255,255,255,0.05);
+  display:flex;
+  flex-direction:column;
+}
+
+.schedule li span{
+  font-weight:bold;
+  margin-bottom:6px;
+}
+
+.schedule li em{
+  font-style:normal;
+  color:#facc15;
+}
+
+.schedule li:last-child{
+  border-bottom:none;
+}
+
+/* Mobile */
+@media(max-width:480px){
+  .schedule h2{font-size:1.5rem}
+}
 
   /* register form */
   form{display:grid;gap:10px}
@@ -344,6 +390,12 @@ height:40px;border-radius:50%;
     border-radius: 43px;
     border: 3px solid white;
   }
+  .p1{
+    text-align:center;
+    font-weight:bold;
+    margin-bottom:10px;
+    color:#facc15;
+  }
 }
  /* Hamburger button */
    
@@ -361,6 +413,140 @@ height:40px;border-radius:50%;
   }
 }
 
+.recent-collab {
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 12px;
+  text-align: center;
+  animation: glow 3s infinite linear;
+}
+
+.collab-title {
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: white;
+}
+
+.collab-img {
+  width: 100%;
+  max-width: 450px;
+  border-radius: 10px;
+}
+
+/* Multi color animation */
+@keyframes glow {
+  5%   { background: black; }
+  25%  { background: #ff9f00; }
+  50%  { background: #00c3ff; }
+  75%  { background: #7b00ff; }
+  100% { background: #ff004c; }
+}
+.register-header {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#modeSelect {
+width:100%;
+      max-width:300px;
+      padding:10px;
+      border-radius:10px;
+      border:none;
+      background:#111827;
+      color:#fff;
+      margin-left: 35px;
+}
+.p1{
+  text-align:center;
+font-weight:bold;
+margin-bottom: 10px;
+color:#facc15;
+}
+@media (min-width: 769px) {
+  .p1 {
+    position: absolute;
+    left: 740px;
+    color: white;
+    font-size: 12px;
+    margin-top: 20px;
+  }
+#modeSelect {
+  border: 2px solid white;
+}
+
+
+
+/* Schedule Section */
+.schedule{
+  max-width: 700px;
+  margin: 50px auto;
+  padding: 0 15px;
+  color: #fff;
+}
+
+.schedule h2{
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.card1{
+  background: rgba(255,255,255,0.03);
+  padding: 20px;
+  border-radius: 15px;
+  border: 1px solid rgba(255,255,255,0.04);
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+.card1 ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card1 ul li{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 12px 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  flex-wrap: wrap;
+}
+
+.card1 ul li span{
+  font-weight: bold;
+  flex: 1 1 100%;
+  margin-bottom: 5px;
+}
+
+.card1 ul li em{
+  font-style: normal;
+  color: #facc15;
+  flex: 1 1 100%;
+}
+
+.card1 ul li:last-child{
+  border-bottom: none;
+}
+
+/* Responsive */
+@media(max-width:480px){
+  .schedule h2{
+    font-size: 1.5rem;
+  }
+  .card1 ul li{
+    flex-direction: column;
+    padding: 10px 5px;
+  }
+  .card1 ul li em{
+    margin-left: 0;
+    font-size: 0.95rem;
+  }
+}
 </style>
 
   
@@ -376,7 +562,7 @@ height:40px;border-radius:50%;
 <a href="#leaderboard">LEADERBOARD</a>
   <a href="#contact">CONTACT</a>
 </nav>
-<div class="mini">Created on 20 Oct 2025</div>
+<div class="mini">100% Trust for A-Arena</div>
   <a href="index openlogo.html" class="logo-link">
 <img class="logo" src="logo.png">
 </a>
@@ -395,6 +581,13 @@ height:40px;border-radius:50%;
   Join WhatsApp group 
 </a>
 </div>
+<!-- Recent Collaboration -->
+<a href="index collab.html">
+<div class="recent-collab">
+  <p class="collab-title">🤝 Recent Collaboration click this image and more information</p>
+  <img src="collab.png" alt="Collaboration" class="collab-img">
+</div>
+</a>
 <p style="margin-top:10px;color:#c9d9ff;font-size:13px">Tip: Scan QR and join WhatsApp group because daily update and matches custom code and play earn money!. 
 -----------
 The button above that says Join WhatsApp Group can also be used to join WhatsApp. But if it doesn’t work for someone the second option is to scan this QR code with WhatsApps scanner and they will easily be able to join. Thank you</p>
@@ -418,7 +611,7 @@ The button above that says Join WhatsApp Group can also be used to join WhatsApp
 <p class="note">A-arena Free Fire tournament for players across Pakistan. Every match is recorded and highlights uploaded on our YouTube channel.</p>
 <ul style="margin-top:10px;color:#d6e6ff">
 <li>Open for all skill levels</li>
-<li>entry fee 20 PKR</li>
+<li>entry fee 50 PKR</li>
 <li>Quick bracket, fast prizes</li>
 </ul>
 </div>
@@ -429,8 +622,8 @@ The button above that says Join WhatsApp Group can also be used to join WhatsApp
 <strong class="mein">Prizes:</strong>
 <div> 
               
-<p id="paragraph"> entry fee 20 PKR ---  
-per kill 15 PKR 
+<p id="paragraph"> entry fee 50 PKR ---  
+per kill 40 PKR 
 thousand of player enjoy and earn money</p></div>
 </div>
 </div>
@@ -438,18 +631,18 @@ thousand of player enjoy and earn money</p></div>
 </section>
 <!-- SCHEDULE -->
 <section id="schedule" class="schedule">
-<h2>Schedule</h2>
-<div class="card">
-<ul>
-<li><span>MATCH STARTED AT</span> <strong></strong></li>
-<li><span>Match 1</span> <em>Night 10:00 PM</em></li>
-<li><span>Match 2</span> <em>Night 12:20 PM</em></li>
-<li><span>Results & Highlights</span> <em>1:00 PM night</em></li>
-<li><span>Payment Time</span> <em>    You will get the money after the match ends.
-</em></li>
-<li><span>There will be 2 matches per day, and in the future, there will be more matches if people’s response is good. Thank you!</span></li>
-</ul>
-</div>
+  <h2>Schedule</h2>
+  <div class="card1">
+    <ul>
+      <li><span>ONLY 3 MATCHES IN A WEEK AND MATCH STARTED AT</span></li>
+      <li><span>Match 1</span> <em>Monday Night 10:00 PM BR Match</em></li>
+      <li><span>Match 2</span> <em>Thursday Night 10:00 PM CS 4V4 Match</em></li>
+      <li><span>Match 3</span> <em>Sunday Night 10:00 PM 1v1 Custom</em></li>
+      <li><span>Results & Highlights</span> <em>11:00 PM night</em></li>
+      <li><span>Payment Time</span> <em>You will get the money after the match ends.</em></li>
+      <li><span>There will be 3 matches per week and in the future there will be more matches if people’s response is good. Thank you!</span></li>
+    </ul>
+  </div>
 </section>
 <!-- RULES -->
 <section id="rules">
@@ -464,8 +657,18 @@ thousand of player enjoy and earn money</p></div>
 </div>
 </section>
 <!-- REGISTER -->
+<div>
+<p class="p1">What You Want To Play</p>
+</div>
 <section id="register">
-<h2>Register</h2>
+<div class="register-header">
+  <h2>Registration BR Tournament</h2>
+  <select id="modeSelect">
+   <option value="">Select Mode</option>
+    <option value="CS">Clash Squad (CS)</option>
+    <option value="LoneWolf">1vs1 Castom</option>
+  </select>
+</div>
 <div class="card">
 <form id="regForm">
 <div class="row">
@@ -505,6 +708,7 @@ thousand of player enjoy and earn money</p></div>
 </form>
 </div>
 </section>
+
 <!-- LEADERBOARD -->
 <section id="leaderboard">
 <h2>Leaderboard / Registered Players</h2>
@@ -526,29 +730,23 @@ thousand of player enjoy and earn money</p></div>
 <div class="grid">
 <div class="card contact">
 <h3>Organizers</h3>
-<p class="note">WhatsApp: +923306502660</p>
+<p class="note">Email: atifgamerz510@gmail.com</p>
 <p class="note">Free Fire name: 아티프-모</p>
 <div class="socials" style="margin-top:12px">
-<div style="padding:8px;background:rgba(255,255,255,0.03);border-radius:8px">Discord: discord.gg <a href="https://discord.gg/RNtMwN7s"><u style="color:#ffd54f;">Atif아티프</u></a></div>
+<div style="padding:8px;background:rgba(255,255,255,0.03);border-radius:8px">Discord: discore.egg <a href="https://discord.gg/PR2MkMVC"><u style="color:#ffd54f;">Atifbhe Gamerz</u></a></div>
 <div style="padding:8px;background:rgba(255,255,255,0.03);border-radius:8px;">Instagram:<a href="https://www.instagram.com/gp.atif8/?utm_source=qr&r=nametag"> <u style="color:#ffd54f;">@khan.atif9</u></a></div>
 </div>
 </div>
 <div class="card">
 <h3>FAQ</h3>
-<p class="note"><strong>Q:</strong> Is entry fee? <strong>A:</strong> Yes, only 20 PKR. Per kill 15 PKR</p>
+<p class="note"><strong>Q:</strong> Is entry fee? <strong>A:</strong> Yes, only 50 PKR. Per kill 40 PKR</p>
 <p class="note"><strong>Q:</strong> How do winners get money? <strong>A:</strong> or transfer via easy methods — details on results page.</p>
 
-
-<strong style="color: red; margin-left: 120px;">Disclaimer</strong>
-<p style="color: white; font-weight: 600; margin-left: 5px;">"A-arena" is an independent platform and is not affiliated with endorsed by or connected to any official eSports organization league or brand. All trademarks, logos, and brand names mentioned on this site belong to their respective owners. Any reference to existing eSports entities is for informational or descriptive purposes only and does not imply partnership or sponsorship.
-🚫this is not a esports🚷
-but this is A-arena ✅
-</p>
 </div>
 </div>
 </section>
 <footer style="padding:22px 0;text-align:center;color:#9fb7ff">
-        © 2025 A-ARENA • Built by Atif • <a href="#home">Back to top</a>
+        © 2026 A-ARENA All Right Receive • Built by Atif • <a href="#home">Back to top</a>
 </footer>
 </div>
  </main>
@@ -567,7 +765,7 @@ but this is A-arena ✅
     <h2>MENU</h2>
   <strong> <ul>
  <a href="index home.html"><li>Home</li></a>
-<a href="index Privacy Policy.html"><li>privacy policy</li></a>
+<a href="index privacy policy.html"><li>privacy policy</li></a>
 <a href="index tournament.html"><li>Tournament</li></a>
 <a href="index blog.html"><li>Blog/News</li></a>
 <a href="index events.html"><li>Events</li></a>
@@ -583,7 +781,7 @@ but this is A-arena ✅
   <!-- Overlay -->
   <div class="overlay" id="overlay"></div>
 
-  <script>
+<script>
   
   function escapeHtml(text) {
   return text.replace(/[&<>"']/g, m => (
@@ -635,13 +833,28 @@ function isAdmin(){
   /* ---------- Dummy Players (Fake Data) ---------- */
 function getDummyPlayers(){
   return [
-    {name: 'Shadow_Killer', uid: '8599774583', city: 'Karachi'},
-    {name: 'ProGamer99', uid: '7788990011', city: 'Lahore'},
-    {name: 'FireStorm', uid: '6655443322', city: 'Islamabad'},
-    {name: 'HeadHunter', uid: '5544332211', city: 'mirpurkhas'},
-    {name: 'SnipeKing', uid: '4433221100', city: 'pakistan'},
-    {name: 'BattleQueen', uid: '3322110099', city: 'Faisalabad'},
-    {name: 'RushMaster', uid: '2211009988', city: 'hydrabad'},
+    {name: '亗ᴾᴿᴼ•Asad࿐', uid: '9366174104', city: 'Karachi'},
+    {name: '★PVP〆RUOK..!', uid: '5084078475', city: 'Karachi'},
+    {name: '⁸⁰⁴乂ᴴᴬᴹᶻᴬ', uid: '6515575362', city: 'Karachi'},
+    {name: '꧁Player456꧂모', uid: '3176078573', city: 'Karachi'},
+    {name: '༒Pʟᴀʏᴇʀ⁰⁰²༒', uid: '8073336688', city: 'Karachi'},
+    {name: 'ᏟhᎾᏃᎬ乂,ff', uid: '9204917972', city: 'Karachi'},
+    {name: 'ミ★THEMARCO★2', uid: '9104539858', city: 'Karachi'},
+    {name: 'Eʀᴇɴ ♡︎', uid: '5155224894', city: 'Karachi'},
+    {name: 'ƒℓαɱ_εאε', uid: '4439339585', city: 'Karachi'},
+    {name: 'goharkiller9', uid: '6459401639', city: 'Karachi'},
+    {name: 'ıʏıツShαɴiᴾᵏ', uid: '1250204441', city: 'Karachi'},
+    {name: 'ASHIQㅤJUTT', uid: '4640682538', city: 'Karachi'},
+    {name: '---', uid: '8599774583', city: 'Karachi'},
+    {name: '----', uid: '8599774583', city: 'Karachi'},
+    {name: '---', uid: '8599774583', city: 'Karachi'},
+    {name: '----', uid: '8599774583', city: 'Karachi'},
+    {name: '----', uid: '7788990011', city: 'Lahore'},
+    {name: '---', uid: '6655443322', city: 'Islamabad'},
+    {name: '----', uid: '5544332211', city: 'mirpurkhas'},
+    {name: '----', uid: '4433221100', city: 'pakistan'},
+    {name: '---', uid: '3322110099', city: 'Faisalabad'},
+    {name: '----', uid: '2211009988', city: 'hydrabad'},
   ];
 }
 
@@ -657,7 +870,6 @@ function getDummyPlayers(){
       showMsg('Please enter your name and UID city email and phone/WhatsApp number.', 'error');
       return;
     }
-
     // basic duplicate check by UID
     let players = getPlayers();
     const exists = players.find(p => p.uid === uid);
@@ -820,6 +1032,21 @@ isAdmin()
     showMsg('Email failed. See console for details.','error');
   });
 }
+</script>
+<script>
+  const modeSelect = document.getElementById('modeSelect');
+
+  modeSelect.addEventListener('change', function() {
+    const mode = this.value;
+
+    if(!mode) return; // agar koi select nahi kiya, kuch na kare
+
+    if(mode === 'CS'){
+window.location.href = 'index cs.html';       // BR ka page
+    } else if(mode === 'LoneWolf'){
+window.location.href = 'index lw.html'; // LoneWolf ka page
+    }
+  });
 </script>
 </body>
 </html>
