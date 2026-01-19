@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CS 4v4 Registration</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<style>
+  * { box-sizing: border-box; margin:0; padding:0; }
+  body{
+    background: #0b0f1a;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .container{
+    width: 100%;
+    max-width: 420px;
+    padding: 25px;
+    background: linear-gradient(145deg,#0f172a,#020617);
+    border-radius: 15px;
+    box-shadow: 0 0 35px rgba(250,204,21,0.15);
+  }
+
+  h2{
+    text-align:center;
+    margin-bottom:20px;
+    font-size: 1.5rem;
+  }
+
+  input, textarea{
+    width:100%;
+    padding:12px;
+    margin:8px 0;
+    border-radius:10px;
+    border:none;
+    background:#111827;
+    color:#fff;
+    font-size:1rem;
+  }
+
+  textarea{ height:80px; }
+
+  .btns{
+    display:flex;
+    gap:10px;
+    flex-wrap: wrap;
+    margin-top:10px;
+  }
+
+  button{
+    flex:1;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    font-weight:bold;
+    cursor:pointer;
+    font-size:1rem;
+  }
+
+  button[type="submit"]{ background:#ffd54f; color:#000; }
+  .reset{ background:#111827; color:#fff; border:1px solid #333; }
+
+  #msg{
+    text-align:center;
+    font-weight:bold;
+    margin-top:10px;
+    min-height:20px;
+  }
+
+  .back{
+    font-weight: 600;
+    display:block;
+    margin-top:18px;
+    text-align:center;
+    background:#ffd54f;
+    color:#000;
+    padding:10px;
+    border-radius:10px;
+    text-decoration:none;
+  }
+
+  @media(max-width:480px){
+    h2{ font-size:1.3rem; }
+    input, textarea, button{ font-size:0.95rem; padding:10px; }
+  }
+</style>
+
+<script>
+  emailjs.init("jbD0KTRIh5OfDV8bV");
+</script>
+</head>
+
+<body>
+<div class="container">
+  <h2>Register For CS 4v4 Custom</h2>
+
+  <form id="regForm">
+    <input type="text" name="cs_leader_uid" placeholder="Player 1 Leader UID" required>
+    <input type="text" name="cs_leader_name" placeholder="Player 1 Leader Name" required>
+
+    <input type="text" name="cs_player2_uid" placeholder="Player 2 UID" required>
+    <input type="text" name="cs_player3_uid" placeholder="Player 3 UID" required>
+    <input type="text" name="cs_player4_uid" placeholder="Player 4 UID" required>
+
+    <input type="tel" name="cs_phone" placeholder="+92xxxxxxxxxx" required>
+    <input type="text" name="cs_city" placeholder="Your city name" required>
+    <input type="email" name="cs_email" placeholder="Leader Email" required>
+
+    <textarea name="cs_note" placeholder="Special note (optional)"></textarea>
+
+    <div class="btns">
+      <button type="submit">Submit Registration</button>
+      <button type="reset" class="reset">Reset</button>
+    </div>
+
+    <!-- Success/Error message -->
+    <div id="msg"></div>
+  </form>
+
+  <a href="index.html" class="back">Back to home</a>
+</div>
+
+<script>
+  const form = document.getElementById("regForm");
+  const msgDiv = document.getElementById("msg");
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.disabled = true; // disable button
+    msgDiv.textContent = "Sending... ⏳";
+    msgDiv.style.color = "#facc15";
+
+    emailjs.sendForm(
+      "service_49u5wdm",
+      "template_otbiyiq",
+      this
+    ).then(() => {
+      msgDiv.textContent = "✅ Registration sent successfully!";
+      msgDiv.style.color = "#22c55e";
+      form.reset();
+      submitBtn.disabled = false;
+    }, (error) => {
+      msgDiv.textContent = "❌ Error sending form, try again.";
+      msgDiv.style.color = "#f87171";
+      console.log(error);
+      submitBtn.disabled = false;
+    });
+  });
+</script>
+</body>
+</html>

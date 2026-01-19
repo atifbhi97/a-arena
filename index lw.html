@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>1v1 Custom Registration</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<style>
+  /* Reset & Body */
+  * { box-sizing: border-box; margin:0; padding:0; }
+  body{
+    background: linear-gradient(180deg,#020617,#0b1224);
+    font-family: Arial, sans-serif;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  /* Form container */
+  .box{
+    width: 100%;
+    max-width: 420px;
+    padding: 25px;
+    background: #020617;
+    border-radius: 18px;
+    box-shadow: 0 0 35px rgba(250,204,21,0.15);
+  }
+
+  h2{
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+  }
+
+  /* Inputs & Textarea */
+  input, textarea{
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 14px;
+    background: #0b1224;
+    border: 1px solid #1f2937;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 1rem;
+  }
+
+  textarea{
+    height: 90px;
+    resize: none;
+  }
+
+  /* Buttons */
+  .btns{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  button{
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  button[type="submit"]{
+    background: #ffd54f;
+    color: #000;
+  }
+
+  .reset{
+    background: #111827;
+    border: 1px solid #374151;
+    color: #fff;
+  }
+
+  /* Success/Error Message */
+  #msg{
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
+    min-height: 20px;
+  }
+
+  /* Back Link */
+  .back{
+    font-weight: 600;
+    display:block;
+    margin-top:18px;
+    text-align:center;
+    background:#ffd54f;
+    color:#000;
+    padding:10px;
+    border-radius:10px;
+    text-decoration:none;
+  }
+
+  /* Responsive */
+  @media (max-width:480px){
+    h2 { font-size: 1.3rem; }
+    input, textarea, button { font-size: 0.95rem; padding:12px; }
+  }
+</style>
+
+<script>
+  emailjs.init("jbD0KTRIh5OfDV8bV");
+</script>
+</head>
+
+<body>
+<div class="box">
+  <h2>Register For 1v1 Custom</h2>
+
+  <form id="onevoneForm">
+    <input type="text" name="cs4_name" placeholder="Enter your Name" required>
+    <input type="text" name="cs4_uid" placeholder="Enter your UID" required>
+    <input type="text" name="cs4_city" placeholder="Enter your City" required>
+    <input type="text" name="cs4_phone" placeholder="Phone / WhatsApp number" required>
+    <textarea name="onevone_note" placeholder="Optional note"></textarea>
+
+    <div class="btns">
+      <button type="submit" class="submit">Submit Registration</button>
+      <button type="reset" class="reset">Reset</button>
+    </div>
+
+    <!-- Message show here -->
+    <div id="msg"></div>
+  </form>
+
+  <a href="index.html" class="back">Back to Home</a>
+</div>
+
+<script>
+  const form = document.getElementById("onevoneForm");
+  const msgDiv = document.getElementById("msg");
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.disabled = true; // disable button
+    msgDiv.textContent = "Sending... ⏳";
+    msgDiv.style.color = "#facc15";
+
+    emailjs.sendForm(
+      "service_49u5wdm",
+      "template_otbiyiq",
+      this
+    ).then(() => {
+      msgDiv.textContent = "✅ Registration sent successfully!";
+      msgDiv.style.color = "#22c55e";
+      form.reset();
+      submitBtn.disabled = false;
+    }, (error) => {
+      msgDiv.textContent = "❌ Error sending form, try again.";
+      msgDiv.style.color = "#f87171";
+      console.log(error);
+      submitBtn.disabled = false;
+    });
+  });
+</script>
+</body>
+</html>

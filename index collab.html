@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A-Arena × Collaboration</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body{
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  color:#fff;
+  line-height:1.6;
+}
+
+/* HERO */
+.hero{
+  min-height:60vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:40px 20px;
+  animation: fadeIn 1.2s ease;
+}
+
+.hero h1{
+  font-size:2.5rem;
+  margin-bottom:10px;
+}
+
+.hero span{
+  color:#facc15;
+}
+
+.hero p{
+  max-width:700px;
+  margin:auto;
+  color:#cbd5e1;
+}
+
+/* SECTIONS */
+.section{
+  max-width:1000px;
+  margin:40px auto;
+  padding:20px;
+}
+
+.card{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.05);
+  border-radius:18px;
+  padding:25px;
+  margin-bottom:25px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.4);
+  animation: slideUp 1s ease;
+}
+
+.card h2{
+  margin-bottom:10px;
+  color:#facc15;
+}
+
+.card p{
+  color:#e5e7eb;
+  margin-bottom:10px;
+}
+
+/* COLLAB GRID */
+.collab-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:20px;
+}
+
+.collab-box{
+  background:linear-gradient(145deg,#020617,#0f172a);
+  padding:20px;
+  border-radius:16px;
+  text-align:center;
+  transition:.3s;
+}
+
+.collab-box:hover{
+  transform:translateY(-6px);
+  box-shadow:0 0 20px rgba(250,204,21,0.25);
+}
+
+.collab-box img{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  object-fit:cover;
+  margin-bottom:60px;
+  border:2px solid #facc15;
+}
+
+.collab-box h3{
+  margin-bottom:6px;
+}
+
+/* CTA */
+.cta{
+  text-align:center;
+  padding:40px 20px;
+}
+
+.cta button{
+  background:#facc15;
+  color:#000;
+  border:none;
+  padding:14px 30px;
+  border-radius:30px;
+  font-size:1rem;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.cta button:hover{
+  background:#fde047;
+  transform:scale(1.05);
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn{
+  from{opacity:0}
+  to{opacity:1}
+}
+
+@keyframes slideUp{
+  from{opacity:0;transform:translateY(40px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  .hero h1{font-size:1.9rem}
+}
+.img2{
+  height: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <h1>A-Arena <span>Collaboration with random challenger</span></h1>
+    <p>
+      A-Arena proudly collaborates with passionate gaming creators and communities
+      to build a fair, competitive, and professional Free Fire tournament experience.
+    </p>
+  </div>
+</section>
+
+<!-- ABOUT A-ARENA -->
+<section class="section">
+  <div class="card">
+    <h2>About A-Arena</h2>
+    <p>
+      A-Arena is a growing Free Fire tournament platform designed to support
+      competitive players, content creators, and local gaming communities.
+    </p>
+    <p>
+      Our mission is to provide organized tournaments, fair gameplay,
+      transparent rules, and fast payouts while helping talented gamers
+      gain recognition.
+    </p>
+  </div>
+</section>
+
+<!-- COLLAB INFO -->
+<section class="section">
+  <div class="card">
+    <h2>About This Collaboration</h2>
+    <p>
+      This collaboration is built on trust, creativity, and mutual growth.
+      Together, we aim to expand tournament reach, improve match quality,
+      and give players more opportunities to compete.
+    </p>
+    <p>
+      Our partner supports A-Arena by promoting tournaments, engaging players,
+      and helping build a strong competitive environment.
+    </p>
+  </div>
+</section>
+
+<!-- COLLAB PARTNERS -->
+<section class="section">
+  <div class="card">
+    <h2>Collaboration Partners</h2>
+
+    <div class="collab-grid">
+      <div class="collab-box">
+        <img class="img1" src="partner1.png" alt="Partner">
+        <h3>Gaming Partner</h3>
+        <p>Community support & promotions</p>
+      </div>
+
+      <div class="collab-box">
+        <img src="partner2.png" alt="Partner">
+        <h3>Content Creator</h3>
+        <p>Match highlights & publicity</p>
+      </div>
+
+      <div class="collab-box">
+        <img class="img2" src="partner3.png" alt="Partner">
+        <h3>Esports Group</h3>
+        <p>Competitive player management</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <h2>Want to Collaborate With A-Arena?</h2>
+  <p style="color:#cbd5e1;margin:10px 0 20px">
+    We are always open to new partnerships and opportunities.
+  </p>
+  <button onclick="contactUs()">Contact A-Arena</button>
+</section>
+
+<script>
+function contactUs(){
+  alert("📩 Contact A-Arena via WhatsApp or Email for collaboration!");
+}
+</script>
+
+</body>
+</html>
