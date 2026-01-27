@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>A-Arena | Launching Feb 27</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-pink: #ff0055;
+            --neon-blue: #00f2ff;
+            --neon-yellow: #f3ff00;
+            --bg-black: #020205;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--bg-black);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Mobile scrolling fix */
+            perspective: 1000px;
+            padding: 20px;
+        }
+
+        /* Responsive Grid Background */
+        .grid-bg {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background-image: 
+                linear-gradient(rgba(0, 242, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 242, 255, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            transform: rotateX(70deg) translateY(-20%);
+            animation: grid-move 10s linear infinite;
+            z-index: -1;
+            mask-image: linear-gradient(to top, rgba(0,0,0,1), transparent);
+        }
+
+        @keyframes grid-move {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 400px; }
+        }
+
+        /* Full Container */
+        .main-container {
+            width: 100%;
+            max-width: 1000px;
+            text-align: center;
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* COMING SOON - Scalable for Mobile */
+        .coming-soon {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.5rem, 10vw, 7rem); /* Auto-resize text */
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: clamp(5px, 2vw, 15px);
+            line-height: 1;
+            position: relative;
+            animation: text-float 3s ease-in-out infinite, lightning-glow 5s infinite;
+            filter: drop-shadow(0 0 10px var(--neon-blue));
+        }
+
+        .coming-soon::before, .coming-soon::after {
+            content: "COMING SOON";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-black);
+            pointer-events: none;
+        }
+
+        .coming-soon::before {
+            left: 2px;
+            text-shadow: -2px 0 var(--neon-pink);
+            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+            animation: glitch-anim 2s infinite linear alternate-reverse;
+        }
+
+        .coming-soon::after {
+            left: -2px;
+            text-shadow: 2px 0 var(--neon-blue);
+            clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+            animation: glitch-anim 2s infinite linear alternate;
+        }
+
+        /* A-ARENA PREMIUM STORE - Spacing fix */
+        .sub-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(0.9rem, 4vw, 1.8rem);
+            color: #fff;
+            letter-spacing: clamp(3px, 1.5vw, 8px);
+            font-weight: 900;
+            display: inline-block;
+            background: linear-gradient(90deg, #fff, var(--neon-blue), #fff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: sub-shine 3s linear infinite;
+            margin: 10px 0;
+        }
+
+        /* LAUNCH DATE - Mobile Layout */
+        .launch-date {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(0.7rem, 2.5vw, 1.1rem);
+            color: var(--neon-yellow);
+            padding: 12px 20px;
+            border: 1px solid var(--neon-yellow);
+            display: inline-block;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: rgba(0,0,0,0.5);
+            box-shadow: 0 0 15px rgba(243, 255, 0, 0.2);
+            animation: border-flicker 2s infinite alternate;
+            margin-top: 10px;
+        }
+
+        /* Fixed Keyframes for Mobile Performance */
+        @keyframes text-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes lightning-glow {
+            0%, 10%, 100% { text-shadow: 0 0 10px var(--neon-blue); }
+            5% { text-shadow: 0 0 20px var(--neon-blue), 0 0 40px var(--neon-pink); }
+            7% { text-shadow: none; }
+        }
+
+        @keyframes glitch-anim {
+            0% { clip-path: inset(40% 0 61% 0); }
+            100% { clip-path: inset(80% 0 0% 0); }
+        }
+
+        @keyframes sub-shine { to { background-position: 200% center; } }
+
+        @keyframes border-flicker {
+            0%, 100% { opacity: 1; box-shadow: 0 0 15px var(--neon-yellow); }
+            50% { opacity: 0.7; box-shadow: none; }
+        }
+
+        /* Particle performance fix */
+        .particle {
+            position: absolute;
+            background: var(--neon-blue);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh); opacity: 0; }
+        }
+
+        /* Media Query for small phones */
+        @media (max-width: 480px) {
+            .main-container { gap: 10px; }
+            .launch-date { width: 90%; padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="grid-bg"></div>
+    
+    <div class="main-container">
+        <h1 class="coming-soon">COMING SOON</h1>
+        <p class="sub-text">A-ARENA PREMIUM STORE</p>
+        <div class="launch-date">START AT 27 FEBRUARY 10:00PM</div>
+    </div>
+
+    <script>
+        function createParticle() {
+            const p = document.createElement('div');
+            p.classList.add('particle');
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.top = '-10px';
+            p.style.background = Math.random() > 0.5 ? '#ff0055' : '#00f2ff';
+            const size = Math.random() * 3 + 2 + 'px';
+            p.style.width = size;
+            p.style.height = size;
+            p.style.animationDuration = Math.random() * 2 + 3 + 's';
+            document.body.appendChild(p);
+            setTimeout(() => p.remove(), 5000);
+        }
+        // Particle limit for mobile performance
+        setInterval(createParticle, 200);
+    </script>
+
+</body>
+</html>
