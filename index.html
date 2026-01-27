@@ -117,45 +117,107 @@ gtag('consent', 'default', {
       margin: 5px 0;
       transition: 0.3s;
     }
-    /* Sidebar on right */
-    .sidebar {
-      position: fixed;
-      top: 0;
-      right: -250px;
-      width: 250px;
-      height: 100%;
-      background: black;
-    box-shadow: -2px 0 6px rgba(0,0,0,0.2);
-      padding: 20px;
-      transition: right 0.3s ease;
-      z-index: 1000;
-      color: white;
-    }
-    .sidebar.active {
-      right: 0;
-    }
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-background: rgba(0,0,0,0.4);
-      display: none;
-      z-index: 999;
-    }
-    .overlay.active {
-      display: block;
-    }
-    .sidebar h2 {
-      margin-bottom: 20px;
-    }
-    .sidebar ul { list-style: none; }
-    .sidebar li {
-      margin: 15px 0;
-      cursor: pointer;
-      
-    }
+  .sidebar {
+    position: fixed;
+    top: 0;
+    right: -280px; /* Slightly wider for better spacing */
+    width: 280px;
+    height: 100%;
+    background: linear-gradient(180deg, #0f0f0f 0%, #1a1a1a 100%);
+    box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+    padding: 30px 15px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    color: white;
+    overflow-y: auto; /* Scroll if list is long */
+}
+
+.sidebar.active {
+    right: 0;
+}
+
+/* Header Style */
+.sidebar-header {
+    margin-bottom: 30px;
+    padding-left: 10px;
+}
+
+.sidebar h2 {
+    font-size: 24px;
+    letter-spacing: 2px;
+    color: #ffcc00; /* Gaming Gold/Yellow color */
+    margin-bottom: 5px;
+}
+
+.header-line {
+    width: 50px;
+    height: 3px;
+    background: #ffcc00;
+}
+
+/* List Styling */
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    margin: 8px 0;
+}
+
+.sidebar li a {
+    text-decoration: none;
+    color: #e0e0e0;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+/* Icons Style */
+.sidebar li a i {
+    margin-right: 15px;
+    width: 20px;
+    text-align: center;
+    color: #ffcc00; /* Icon color */
+    font-size: 18px;
+}
+
+/* Hover Effect */
+.sidebar li a:hover {
+    background: rgba(255, 204, 0, 0.1); /* Light gold glow */
+    color: #ffffff;
+    padding-left: 20px; /* Slight slide effect */
+    border-left: 4px solid #ffcc00;
+}
+
+/* Overlay Styling */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px); /* Modern blur effect */
+    display: none;
+    z-index: 999;
+}
+
+.overlay.active {
+    display: block;
+}
+
+/* Custom Scrollbar for Sidebar */
+.sidebar::-webkit-scrollbar {
+    width: 5px;
+}
+.sidebar::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 10px;
+}
     
 
   /* ---------- LAYOUT ---------- */
@@ -553,7 +615,54 @@ color:#facc15;
   }
 }
 </style>
+<style>
+/* Container jo buttons ko handle karega */
+.button-group {
+    display: flex;
+    flex-wrap: wrap;    /* Mobile par buttons ko neeche bhej dega agar jagah na ho */
+    gap: 10px;          /* Buttons ke beech ka gap */
+    justify-content: center; /* Desktop par center mein dikhayega */
+    align-items: center;
+    margin-top: 20px;
+}
 
+/* Aapka Store Button ka updated style */
+.a-store {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 25px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 14px; /* Desktop ke hisaab se perfect size */
+    font-weight: 800;
+    text-transform: uppercase;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #ff0055, #00f2ff, #ff0055);
+    background-size: 200% auto;
+    animation: shine 3s linear infinite;
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
+    transition: 0.3s;
+    white-space: nowrap; /* Text ko ek hi line mein rakhega */
+}
+
+/* Mobile Screens ke liye adjustment */
+@media (max-width: 768px) {
+    .button-group {
+        flex-direction: column; /* Mobile par buttons ek ke neeche ek aayenge */
+        width: 100%;
+    }
+    .a-store {
+        width: 90%; /* Mobile par button bada dikhega taake click karna asan ho */
+        max-width: 300px;
+    }
+}
+
+@keyframes shine {
+    to { background-position: 200% center; }
+}
+</style>
   
 </head>
 <body>
@@ -585,6 +694,7 @@ color:#facc15;
 <a class="btn secondary" href="https://chat.whatsapp.com/Jt2yHjfB3VQGea3bULu32R?mode=wwt" target="_blank">
   Join WhatsApp group 
 </a>
+  <a href="index store.html" class="a-store">A-ARENA STORE</a>
 </div>
 <!-- Recent Collaboration -->
 <a href="index collab.html">
@@ -765,27 +875,30 @@ thousand of player enjoy and earn money</p></div>
     <span></span>
   </button>
 
-  <!-- Sidebar -->
-  <div class="sidebar" id="sidebar">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-header">
     <h2>MENU</h2>
-  <strong> <ul>
- <a href="index home.html"><li>Home</li></a>
-<a href="index privacy policy.html"><li>privacy policy</li></a>
-<a href="index tournament.html"><li>Tournament</li></a>
-<a href="index blog.html"><li>Blog/News</li></a>
-<a href="index events.html"><li>Events</li></a>
-<a href="index rules.html"><li>Rules & Regulations</li></a>
-<a href="index about.html"><li>About us</li></a>
-<a href="index contact us.html"><li>Contact us</li></a>
-<a href="index terms.html"><li>Terms of Service</li></a>
-<a href="index support.html"><li>Support/Help</li></a>
-<a href="index faq.html"><li>FQA</li></a>
-    </ul>   </strong> 
+    <div class="header-line"></div>
   </div>
+  <ul>
+    <li><a href="index home.html"><i class="fas fa-home"></i> Home</a></li>
+    <li><a href="index random.html"><i class="fas fa-gamepad"></i> Random Challenger</a></li>
+    <li><a href="index tournament.html"><i class="fas fa-trophy"></i> Tournament</a></li>
+    <li><a href="index events.html"><i class="fas fa-calendar-alt"></i> Events</a></li>
+    <li><a href="index blog.html"><i class="fas fa-newspaper"></i> Blog/News</a></li>
+    <li><a href="index rules.html"><i class="fas fa-gavel"></i> Rules & Regulations</a></li>
+    <li><a href="index about.html"><i class="fas fa-user-friends"></i> About Us</a></li>
+    <li><a href="index contact us.html"><i class="fas fa-envelope"></i> Contact Us</a></li>
+    <li><a href="index privacy policy.html"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+    <li><a href="index terms.html"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+    <li><a href="index support.html"><i class="fas fa-headset"></i> Support/Help</a></li>
+    <li><a href="index faq.html"><i class="fas fa-question-circle"></i> FAQ</a></li>
+  </ul>
+</div>
 
-  <!-- Overlay -->
-  <div class="overlay" id="overlay"></div>
-
+<div class="overlay" id="overlay"></div>
 <script>
   
   function escapeHtml(text) {
